@@ -23,14 +23,31 @@ router.get("/:id", (req, res) => {
 // find one category by its `id` value
 // be sure to include its associated Products
 router.post("/", (req, res) => {
+  Category.create(req.body)
+    .then((category) => res.status(200).json(category))
+    .catch((error) => res.status(400).json(error));
   // create a new category
 });
 
 router.put("/:id", (req, res) => {
   // update a category by its `id` value
+  Category.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((category) => res.status(200).json(category))
+    .catch((error) => res.status(400).json(error));
 });
 
 router.delete("/:id", (req, res) => {
+  Category.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((category) => res.status(200).json(category))
+    .catch((error) => res.status(400).json(error));
   // delete a category by its `id` value
 });
 
